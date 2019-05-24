@@ -3,7 +3,7 @@ import React from 'react';
 function TextInput() {
     return (
         <div className="input input--text">
-            <input type="text" />
+            <input className="input__field" type="text" />
         </div>
     );
 }
