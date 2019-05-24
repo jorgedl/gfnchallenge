@@ -3,6 +3,6 @@ import ReactDOM from 'react-dom';
 
 import App from './app/App';
 
-import './less/index.less';
+import './styles/index.less';
 
 ReactDOM.render(<App />, document.getElementById('app'));
