@@ -1,6 +1,12 @@
+@import '../../styles/variables.less';
+
 .input {
     background: #fff;
     padding: 0 0.5rem;
+    border-radius: 0.25rem;
+    display: flex;
+    text-align: left;
+    .apply-box-shadow();
 
     &__field {
         width: 100%;
@@ -8,11 +14,13 @@
         border: 0;
         outline: 0;
         font-size: 1rem;
+        text-align: inherit;
     }
 
     &--text {
     }
 
     &--number {
+        text-align: right;
     }
 }

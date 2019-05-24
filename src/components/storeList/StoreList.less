@@ -1,0 +1,27 @@
+@import '../../styles/variables.less';
+
+.store-list {
+    &__list {
+        display: grid;
+        grid-template-columns: 3fr 1fr;
+        .apply-box-shadow();
+        background: @color-white;
+        max-height: 28rem;
+        overflow-y: scroll;
+    }
+
+    &__cell {
+        border-bottom: solid 1px @color-gray;
+        padding: 0.5rem;
+
+        &--header {
+            position: sticky;
+            top: 0;
+            background: #fff;
+        }
+
+        &--number {
+            text-align: right;
+        }
+    }
+}

@@ -1,11 +1,27 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
-function TextInput() {
+function TextInput({ placeholder, icon }) {
     return (
         <div className="input input--text">
-            <input className="input__field" type="text" />
+            <input
+                placeholder={placeholder}
+                className="input__field"
+                type="text"
+            />
+            {icon}
         </div>
     );
 }
+
+TextInput.propTypes = {
+    placeholder: PropTypes.string,
+    icon: PropTypes.node
+};
+
+TextInput.defaultProps = {
+    placeholder: '',
+    icon: null
+};
 
 export default TextInput;
