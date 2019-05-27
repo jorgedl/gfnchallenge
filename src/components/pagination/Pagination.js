@@ -7,8 +7,10 @@ import './Pagination.less';
 const arrowLeft = <img alt="Paginar para a esquerda" src="/images/left.svg" />;
 const arrowRight = <img alt="Paginar para a direita" src="/images/right.svg" />;
 
-const nextPageFn = (current, totalPages) =>
-    current + 1 > totalPages - 1 ? totalPages - 1 : current + 1;
+const nextPageFn = (current, totalPages) => {
+    if (totalPages === 0) return current;
+    return current + 1 > totalPages - 1 ? totalPages - 1 : current + 1;
+};
 const previousPageFn = current => (current - 1 < 0 ? 0 : current - 1);
 
 function Pagination({ currentPage, totalPages, onChange }) {
@@ -19,7 +21,8 @@ function Pagination({ currentPage, totalPages, onChange }) {
     });
 
     const rightArrowClasses = classNames('pagination__arrow', {
-        [`pagination__arrow--disabled`]: currentPage === totalPages - 1
+        [`pagination__arrow--disabled`]:
+            currentPage === totalPages - 1 || totalPages === 0
     });
 
     const currentClassName = classNames(
