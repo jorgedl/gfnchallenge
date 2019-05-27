@@ -1,6 +1,7 @@
 import React, { useReducer, useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import qs from 'query-string';
+import i18next from 'i18next';
 
 // components
 import Filters from '../../components/filters/Filter';
@@ -117,7 +118,7 @@ function StorePerformance(props) {
         <div className="performance">
             <div className="performance__item">
                 <Filters
-                    placeholder="Pesquisar"
+                    placeholder={i18next.t('filters.search')}
                     icon={SearchIcon}
                     type="text"
                     value={nameFilter}
@@ -133,7 +134,7 @@ function StorePerformance(props) {
                         setPage(0)(dispatchPages);
                         setRevenueFilter(value);
                     }}
-                    label="Faturamento mínimo necessário"
+                    label={i18next.t('filters.revenue')}
                     type="number"
                     value={revenueFilter}
                 />

@@ -1,13 +1,18 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
 import './Header.less';
 
-function Header() {
+function Header({ title }) {
     return (
         <div className="header">
-            <h1 className="header__title">Desempenho das Lojas</h1>
+            <h1 className="header__title">{title}</h1>
         </div>
     );
 }
+
+Header.propTypes = {
+    title: PropTypes.string.isRequired
+};
 
 export default Header;

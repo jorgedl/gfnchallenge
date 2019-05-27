@@ -3,13 +3,11 @@
 .performance {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
-    grid-gap: @base-passing;
+    grid-gap: @base-padding;
 
     @media screen and (max-width: 800px) {
         grid-template-columns: repeat(auto-fill, minmax(20rem, 1fr));
-    }
-
-    &__item {
+        grid-gap: 1rem;
     }
 }
 

@@ -3,6 +3,7 @@
 .store-list {
     display: grid;
     grid-template-columns: 3fr 1fr;
+    background: @color-white;
     .apply-box-shadow();
 
     &__cell,
@@ -38,5 +39,9 @@
             background: @color-lower-value;
             color: @color-white;
         }
+    }
+
+    &__empty {
+        padding: 0.5rem;
     }
 }

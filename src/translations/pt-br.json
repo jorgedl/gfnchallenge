@@ -1,0 +1,10 @@
+{
+    "name": "Desempenho das Lojas",
+    "filters": {
+        "search": "Pesquisar",
+        "revenue": "Faturamento mínimo necessário"
+    },
+    "list": {
+        "empty": "Nenhum registro encontrado"
+    }
+}

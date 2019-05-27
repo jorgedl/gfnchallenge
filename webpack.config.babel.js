@@ -118,10 +118,22 @@ const configs = {
         inline: true,
         host: '0.0.0.0',
         contentBase: './dist',
-        port: 8010,
+        port: 8005,
         disableHostCheck: true
     }
 };
+
+if (process.env.NODE_ENV === 'development') {
+    configs.plugins.push(
+        new webpack.DefinePlugin({
+            'process.env': {
+                API_URL: JSON.stringify(
+                    'http://localhost:8000/performance/api/'
+                )
+            }
+        })
+    );
+}
 
 if (process.env.NODE_ENV === 'production') {
     configs.plugins.push(

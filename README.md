@@ -4,6 +4,10 @@
 
 `npm install`
 
+#### Servidor de mocks (Obrigatória a execução para popular os dados das telas)
+
+`npm run start-mock-server`<br />
+
 #### Servidor de desenvolvimento local
 
 `npm start`<br />

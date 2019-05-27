@@ -1,6 +1,10 @@
 import axios from 'axios';
 
-const URL = 'http://localhost:8000/performance/api/';
+let URL = '/performance/api/';
+
+if (process.env.API_URL !== undefined) {
+    URL = process.env.API_URL;
+}
 
 const api = axios.create({
     baseURL: URL

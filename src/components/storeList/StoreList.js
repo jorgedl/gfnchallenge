@@ -1,6 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
+import i18next from 'i18next';
+
 import StoreItem from './StoreItem';
 
 import './StoreList.less';
@@ -46,6 +48,11 @@ function StoreList({ items, getStoreItemSuffix, onSort, columns, sortInfo }) {
                     />
                 );
             })}
+            {items.length === 0 && (
+                <div className="store-list__empty">
+                    {i18next.t('list.empty')}
+                </div>
+            )}
         </div>
     );
 }
