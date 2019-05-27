@@ -4,23 +4,33 @@ import StoreItem from './StoreItem';
 
 import './StoreList.less';
 
-function StoreList({ items }) {
+function StoreList({ items, getStoreItemSuffix }) {
     return (
         <div className="store-list">
             <div className="store-list__list">
-                <div className="store-list__cell store-list__cell--header">
+                <button
+                    type="button"
+                    className="store-list__cell store-list__cell--header"
+                >
                     Loja
-                </div>
-                <div className="store-list__cell store-list__cell--header">
+                </button>
+                <button
+                    type="button"
+                    className="store-list__cell store-list__cell--header"
+                >
                     Faturamento
-                </div>
-                {items.map(({ name, revenue, latitude, longitude }) => (
-                    <StoreItem
-                        key={`${name}${latitude}${longitude}`}
-                        label={name}
-                        value={revenue}
-                    />
-                ))}
+                </button>
+                {items.map(item => {
+                    const { name, revenue, latitude, longitude } = item;
+                    return (
+                        <StoreItem
+                            key={`${name}${latitude}${longitude}`}
+                            label={name}
+                            value={revenue}
+                            className={getStoreItemSuffix(item)}
+                        />
+                    );
+                })}
             </div>
         </div>
     );
@@ -34,11 +44,13 @@ StoreList.propTypes = {
             latitude: PropTypes.number,
             longitude: PropTypes.number
         })
-    )
+    ),
+    getStoreItemSuffix: PropTypes.func
 };
 
 StoreList.defaultProps = {
-    items: []
+    items: [],
+    getStoreItemSuffix: () => {}
 };
 
 export default StoreList;

@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import { TextInput, NumberInput } from '../../components/inputs/Inputs';
+import { TextInput, NumberInput } from '../inputs/Inputs';
 
 import './Filter.less';
 
@@ -10,13 +10,18 @@ const inputs = {
     number: NumberInput
 };
 
-function Filters({ type, label, placeholder, icon }) {
+function Filters({ type, label, placeholder, icon, onChange, value }) {
     const InputComponent = inputs[type];
 
     return (
         <div className="filter">
             <div className="filter__label">{label}</div>
-            <InputComponent icon={icon} placeholder={placeholder} />
+            <InputComponent
+                onChange={onChange}
+                icon={icon}
+                placeholder={placeholder}
+                value={value}
+            />
         </div>
     );
 }
@@ -25,14 +30,18 @@ Filters.propTypes = {
     type: PropTypes.string,
     label: PropTypes.string,
     placeholder: PropTypes.string,
-    icon: PropTypes.node
+    icon: PropTypes.node,
+    onChange: PropTypes.func,
+    value: PropTypes.oneOfType([PropTypes.string, PropTypes.number])
 };
 
 Filters.defaultProps = {
     type: 'text',
     label: '',
     placeholder: '',
-    icon: null
+    icon: null,
+    onChange: () => {},
+    value: undefined
 };
 
 export default Filters;

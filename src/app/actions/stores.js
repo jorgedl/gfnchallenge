@@ -5,7 +5,8 @@ function fetchStores() {
     return async dispatch => {
         const url = '/stores/';
         const { data } = await httpClient.get(url);
-        dispatch({ stores: data, type: STORES_FETCHED });
+        const stores = data.map((store, i) => ({ ...store, id: i }));
+        dispatch({ stores, type: STORES_FETCHED });
     };
 }
 

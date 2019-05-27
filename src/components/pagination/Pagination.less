@@ -1,0 +1,32 @@
+@import '../../styles/variables.less';
+
+.pagination {
+    height: @pagination-height;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    &__arrow {
+        border: 0;
+        background: transparent;
+        cursor: pointer;
+        &--disabled {
+            opacity: 0.6;
+        }
+    }
+
+    &__button {
+        border: 0;
+        background: transparent;
+        height: auto;
+        opacity: 0.6;
+        outline: 0;
+        cursor: pointer;
+
+        &--current {
+            font-weight: 600;
+            opacity: 1;
+            cursor: auto;
+        }
+    }
+}

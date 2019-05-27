@@ -5,23 +5,26 @@
         display: grid;
         grid-template-columns: 3fr 1fr;
         .apply-box-shadow();
-        background: @color-white;
-        max-height: 28rem;
-        overflow-y: scroll;
     }
 
     &__cell {
         border-bottom: solid 1px @color-gray;
+        background: @color-white;
         padding: 0.5rem;
-
-        &--header {
-            position: sticky;
-            top: 0;
-            background: #fff;
-        }
 
         &--number {
             text-align: right;
+        }
+
+        &--lower {
+            color: @color-lower-value;
+        }
+
+        &--header {
+            border: 0;
+            border-bottom: solid 1px @color-gray;
+            text-align: inherit;
+            cursor: pointer;
         }
     }
 }

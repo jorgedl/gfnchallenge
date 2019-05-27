@@ -13,15 +13,6 @@ function App() {
                 <Header />
                 <div className="app__container">
                     <Route exact path="/" component={StorePerformance} />
-                    <Route path="/page/:pageId" component={StorePerformance} />
-                    <Route
-                        path="/page/:pageId/revenue/:revenueValue"
-                        component={StorePerformance}
-                    />
-                    <Route
-                        path="revenue/:revenueValue"
-                        component={StorePerformance}
-                    />
                 </div>
             </div>
         </Router>

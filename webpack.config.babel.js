@@ -5,11 +5,17 @@ import HtmlWebpackPlugin from 'html-webpack-plugin';
 import UglifyJSPlugin from 'uglifyjs-webpack-plugin';
 
 const configs = {
-    entry: path.resolve(__dirname, 'src/index.js'),
+    entry: {
+        main: path.resolve(__dirname, 'src/index.js'),
+        StorePerformance: path.resolve(
+            __dirname,
+            'src/app/storePerformance/StorePerformance.js'
+        )
+    },
 
     output: {
         path: path.resolve(__dirname, 'dist'),
-        filename: 'geofusion.[hash].js'
+        filename: '[name].[hash].js'
     },
 
     resolve: {
@@ -72,6 +78,19 @@ const configs = {
         ]
     },
 
+    optimization: {
+        minimizer: [],
+        splitChunks: {
+            cacheGroups: {
+                commons: {
+                    test: /[\\/]node_modules[\\/]/,
+                    name: 'vendors',
+                    chunks: 'all'
+                }
+            }
+        }
+    },
+
     plugins: [
         new CleanWebpackPlugin(['dist']),
         new HtmlWebpackPlugin({
@@ -90,7 +109,7 @@ const configs = {
         inline: true,
         host: '0.0.0.0',
         contentBase: './dist',
-        port: 8005,
+        port: 8010,
         disableHostCheck: true
     }
 };
@@ -103,9 +122,9 @@ if (process.env.NODE_ENV === 'production') {
             }
         })
     );
+    configs.optimization.minimizer.push(new UglifyJSPlugin());
 
     configs.mode = 'production';
-    configs.plugins.push(new UglifyJSPlugin());
 } else {
     configs.devtool = 'inline-source-map';
     configs.mode = 'development';

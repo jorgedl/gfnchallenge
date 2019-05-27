@@ -10,8 +10,6 @@
         "camelcase": "off"
     },
     "globals": {
-        "window": true,
-        "document": true,
-        "navigator": true
+        "document": true
     }
 }
