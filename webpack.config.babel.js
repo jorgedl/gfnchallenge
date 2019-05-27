@@ -104,8 +104,8 @@ const configs = {
             filename: 'index.html'
         }),
         new CopyWebpackPlugin([
-            { from: path.resolve(__dirname, 'src/images') },
-            { from: path.resolve(__dirname, 'src/fonts') }
+            { from: path.resolve(__dirname, 'src/images'), to: 'images' },
+            { from: path.resolve(__dirname, 'src/fonts'), to: 'fonts' }
         ]),
         new webpack.ProvidePlugin({
             Promise: 'es6-promise'
