@@ -3,6 +3,7 @@ import path from 'path';
 import CleanWebpackPlugin from 'clean-webpack-plugin';
 import HtmlWebpackPlugin from 'html-webpack-plugin';
 import UglifyJSPlugin from 'uglifyjs-webpack-plugin';
+import CopyWebpackPlugin from 'copy-webpack-plugin';
 
 const configs = {
     entry: {
@@ -73,7 +74,11 @@ const configs = {
             },
             {
                 test: /\.(svg|png|jpg|jpeg|gif)(\?v=(.*))?$/,
-                loader: 'file-loader'
+                loader: 'file-loader',
+                options: {
+                    outputPath: 'images/',
+                    publicPath: '/images/'
+                }
             }
         ]
     },
@@ -98,6 +103,10 @@ const configs = {
             template: 'src/index.html',
             filename: 'index.html'
         }),
+        new CopyWebpackPlugin([
+            { from: path.resolve(__dirname, 'src/images') },
+            { from: path.resolve(__dirname, 'src/fonts') }
+        ]),
         new webpack.ProvidePlugin({
             Promise: 'es6-promise'
         })
