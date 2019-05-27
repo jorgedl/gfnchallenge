@@ -7,7 +7,7 @@ import UglifyJSPlugin from 'uglifyjs-webpack-plugin';
 const configs = {
     entry: {
         main: path.resolve(__dirname, 'src/index.js'),
-        StorePerformance: path.resolve(
+        performance: path.resolve(
             __dirname,
             'src/app/storePerformance/StorePerformance.js'
         )
@@ -94,9 +94,9 @@ const configs = {
     plugins: [
         new CleanWebpackPlugin(['dist']),
         new HtmlWebpackPlugin({
-            inject: false,
-            title: 'Desempenho das Lojas',
-            template: 'src/index.html'
+            hash: true,
+            template: 'src/index.html',
+            filename: 'index.html'
         }),
         new webpack.ProvidePlugin({
             Promise: 'es6-promise'
