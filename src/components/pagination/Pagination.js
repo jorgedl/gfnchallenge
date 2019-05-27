@@ -141,7 +141,11 @@ function Pagination({ currentPage, totalPages, onChange }) {
 Pagination.propTypes = {
     currentPage: PropTypes.number.isRequired,
     totalPages: PropTypes.number.isRequired,
-    onChange: PropTypes.func.isRequired
+    onChange: PropTypes.func
+};
+
+Pagination.defaultProps = {
+    onChange: () => {}
 };
 
 export default Pagination;

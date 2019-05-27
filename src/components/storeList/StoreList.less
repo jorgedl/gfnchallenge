@@ -1,17 +1,18 @@
 @import '../../styles/variables.less';
 
 .store-list {
-    &__list {
-        display: grid;
-        grid-template-columns: 3fr 1fr;
-        .apply-box-shadow();
-    }
+    display: grid;
+    grid-template-columns: 3fr 1fr;
+    .apply-box-shadow();
 
-    &__cell {
+    &__cell,
+    &__header {
         border-bottom: solid 1px @color-gray;
         background: @color-white;
         padding: 0.5rem;
+    }
 
+    &__cell {
         &--number {
             text-align: right;
         }
@@ -19,12 +20,23 @@
         &--lower {
             color: @color-lower-value;
         }
+    }
 
-        &--header {
-            border: 0;
-            border-bottom: solid 1px @color-gray;
-            text-align: inherit;
-            cursor: pointer;
+    &__header {
+        border: 0;
+        border-bottom: solid 1px @color-gray;
+        text-align: inherit;
+        cursor: pointer;
+        outline: 0;
+
+        &--asc {
+            background: @color-brand;
+            color: @color-white;
+        }
+
+        &--desc {
+            background: @color-lower-value;
+            color: @color-white;
         }
     }
 }

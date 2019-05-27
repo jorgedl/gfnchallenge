@@ -7,9 +7,10 @@ import './StoreMap.less';
 let map;
 const markers = {};
 
-function getAbsentItemsToBeRemoved(items) {
-    return Object.keys(markers).filter(
-        markerId => !items.some(({ id }) => parseFloat(markerId) === id)
+export function getAbsentItemsToBeRemoved(currentMarkers, itemsToBeRendered) {
+    return Object.keys(currentMarkers).filter(
+        markerId =>
+            !itemsToBeRendered.some(({ id }) => parseFloat(markerId) === id)
     );
 }
 
@@ -33,7 +34,7 @@ function StoreMap({ items, getStoreIconUrl }) {
     // This function will be executed everytime items array update, thats why we are observing [items]
     useEffect(() => {
         // Removing items rejected by filters from the map
-        const itemsToBeRemoved = getAbsentItemsToBeRemoved(items);
+        const itemsToBeRemoved = getAbsentItemsToBeRemoved(markers, items);
         itemsToBeRemoved.forEach(id => {
             map.removeLayer(markers[id]);
             delete markers[id];

@@ -20,7 +20,9 @@ import { updatePageCounter, setPage } from '../actions/pages';
 import {
     getItemsByPage,
     getStoreIconUrl,
-    getStoreItemSuffix
+    getStoreItemSuffix,
+    sortStoreList,
+    setSortId
 } from '../../helpers/storesHelper';
 
 // styles
@@ -28,7 +30,16 @@ import './StorePerformance.less';
 
 const DEFAULT_REVENUE_FILTER = '15000';
 
-let mapRef;
+const storeTableColumns = [
+    {
+        id: 'name',
+        label: 'Nome'
+    },
+    {
+        id: 'revenue',
+        label: 'Faturamento'
+    }
+];
 
 const SearchIcon = (
     <img className="search-icon" alt="Search icon" src="/images/search.svg" />
@@ -43,7 +54,7 @@ function StorePerformance(props) {
     const { query, revenue, page = 1 } = qs.parse(locationSearch);
 
     const pagesInitialState = {
-        currentPage: parseFloat(page - 1),
+        currentPage: parseFloat(page) - 1,
         pageSize: 10,
         totalPages: 0
     };
@@ -54,7 +65,6 @@ function StorePerformance(props) {
 
     // Execute only on initialize, thats why second param is []
     useEffect(() => {
-        mapRef = React.createRef();
         fetchStores()(dispatch);
     }, []);
 
@@ -64,6 +74,8 @@ function StorePerformance(props) {
     );
     const [nameFilter, setNameFilter] = useState(query);
 
+    const [sortInfo, setSortInfo] = useState([]);
+
     const filteredList = storeList.filter(({ name }) => {
         if (name !== undefined && nameFilter !== undefined) {
             return name.toUpperCase().includes(nameFilter.toUpperCase());
@@ -71,10 +83,16 @@ function StorePerformance(props) {
         return true;
     });
 
+    let sortedList = filteredList;
+
+    if (sortInfo.length > 0) {
+        sortedList = sortStoreList(sortedList, sortInfo);
+    }
+
     const [pagination, dispatchPages] = useReducer(pages, pagesInitialState);
     const { currentPage, totalPages, pageSize } = pagination;
 
-    const paginatedList = getItemsByPage(filteredList, currentPage, pageSize);
+    const paginatedList = getItemsByPage(sortedList, currentPage, pageSize);
 
     // On page update or filters update, im updating the URL, so the user can save it for later,
     // or share his current page the same way as he see
@@ -123,7 +141,10 @@ function StorePerformance(props) {
             <div className="performance__item">
                 <StoreList
                     items={paginatedList}
+                    columns={storeTableColumns}
                     getStoreItemSuffix={getStoreItemSuffix(revenueFilter)}
+                    onSort={id => setSortId(id, sortInfo, setSortInfo)}
+                    sortInfo={sortInfo}
                 />
                 <Pagination
                     currentPage={currentPage}
@@ -133,7 +154,6 @@ function StorePerformance(props) {
             </div>
             <div className="performance__item">
                 <StoreMap
-                    ref={mapRef}
                     getStoreIconUrl={getStoreIconUrl(revenueFilter)}
                     items={filteredList}
                 />
